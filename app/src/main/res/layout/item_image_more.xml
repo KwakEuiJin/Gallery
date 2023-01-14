@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/loadMoreTextView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="사진 블러오기"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1.0"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
