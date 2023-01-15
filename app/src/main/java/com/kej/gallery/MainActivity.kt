@@ -1,5 +1,6 @@
 package com.kej.gallery
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -27,7 +28,9 @@ class MainActivity : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uriList ->
             updateImages(uriList)
         }
-    private val imageAdapter = ImageAdapter()
+    private val imageAdapter = ImageAdapter {
+        checkPermissions()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +54,16 @@ class MainActivity : AppCompatActivity() {
         binding.imageLoadButton.setOnClickListener {
             checkPermissions()
         }
+        binding.navigateFrameButton.setOnClickListener {
+            navigateToFrameActivity()
+        }
+    }
+
+    private fun navigateToFrameActivity() {
+        val images = imageAdapter.currentList.filterIsInstance<ImageItems.Image>().map { it.uri.toString() }.toTypedArray()
+        val intent = Intent(this, FrameActivity::class.java)
+        intent.putExtra("images", images)
+        startActivity(intent)
     }
 
 

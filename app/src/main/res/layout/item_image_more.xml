@@ -9,7 +9,7 @@
             android:id="@+id/loadMoreTextView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:text="사진 블러오기"
+            android:text="사진 불러오기"
             android:textSize="18dp"
             android:textColor="@color/black"
             android:gravity="center"

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kej.gallery.databinding.ItemImageBinding
 import com.kej.gallery.databinding.ItemImageMoreBinding
 
-class ImageAdapter : ListAdapter<ImageItems, RecyclerView.ViewHolder>(diffUtil) {
+class ImageAdapter(val onclick: ()->Unit) : ListAdapter<ImageItems, RecyclerView.ViewHolder>(diffUtil) {
     companion object {
         private val diffUtil = object : DiffUtil.ItemCallback<ImageItems>() {
             override fun areItemsTheSame(oldItem: ImageItems, newItem: ImageItems): Boolean {
@@ -38,6 +38,9 @@ class ImageAdapter : ListAdapter<ImageItems, RecyclerView.ViewHolder>(diffUtil) 
         private val itemImageMoreBinding: ItemImageMoreBinding
     ) : RecyclerView.ViewHolder(itemImageMoreBinding.root) {
         fun bind() {
+            itemView.setOnClickListener {
+                onclick()
+            }
         }
     }
 
@@ -60,14 +63,13 @@ class ImageAdapter : ListAdapter<ImageItems, RecyclerView.ViewHolder>(diffUtil) 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             IMAGE_MORE_TYPE -> {
-                val inflater = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
                 ImageMoreViewHolder(ItemImageMoreBinding.inflate(inflater, parent, false))
 
             }
             else -> {
-                val inflater = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
                 ImageViewHolder(ItemImageBinding.inflate(inflater, parent, false))
             }
         }
